@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RecargaActivity">
+
+    <Button
+        android:id="@+id/recargaButton"
+        android:layout_width="278dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="100dp"
+        android:background="@color/colorPrimary"
+        android:text="Recargar"
+        android:textColor="#FFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/precioRecarga"
+
+        app:layout_constraintVertical_bias="0.031"
+
+        />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="278dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="100dp"
+        android:background="@color/colorPrimary"
+        android:text="Log out"
+        android:textColor="#FFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/precioRecarga"
+
+        app:layout_constraintVertical_bias="0.431"
+
+        />
+
+    <EditText
+        android:id="@+id/precioRecarga"
+        android:layout_width="273dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="324dp"
+        android:ems="10"
+        android:hint="Cantidad"
+        android:inputType="numberDecimal"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cantidadLabelRecarga"
+        android:layout_width="269dp"
+        android:layout_height="97dp"
+        android:text="$0"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toTopOf="@+id/precioRecarga"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.464"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.528" />
+
+   <!-- <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_menu"
+        /> -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
