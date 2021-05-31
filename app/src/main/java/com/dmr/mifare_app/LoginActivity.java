@@ -54,10 +54,10 @@ public class LoginActivity extends AppCompatActivity {
         firebaseUser= auth.getCurrentUser();
 
         // action to recarga fragment if firebaseUsee!= null
-        /*if(firebaseUser!=null){
+        if(firebaseUser!=null){
             Intent intent = new Intent(this, RecargaActivity.class);
             startActivity(intent);
-        }*/
+        }
 
 
         // boton de registro
