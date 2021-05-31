@@ -15,7 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RecargaActivity"></activity>
+        <activity android:name=".ConfiguracionActivity"></activity>
+        <activity android:name=".HistorialActivity" />
+        <activity android:name=".PagoActivity" />
+        <activity android:name=".RecargaActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

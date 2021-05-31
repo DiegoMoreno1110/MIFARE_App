@@ -9,15 +9,15 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class RecargaActivity extends AppCompatActivity {
+public class ConfiguracionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recarga);
+        setContentView(R.layout.activity_configuracion);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.recargaActivity); // este es el HOME
+        bottomNavigationView.setSelectedItemId(R.id.configuracionActivity); // este es el HOME
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -31,17 +31,15 @@ public class RecargaActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),HistorialActivity.class));
                         overridePendingTransition(0,0);
                         return true;
-                    case R.id.configuracionActivity:
-                        startActivity(new Intent(getApplicationContext(),ConfiguracionActivity.class));
+                    case R.id.recargaActivity:
+                        startActivity(new Intent(getApplicationContext(),RecargaActivity.class));
                         overridePendingTransition(0,0);
                         return true;
-                    case R.id.recargaActivity:
+                    case R.id.configuracionActivity:
                         return true;
                 }
                 return false;
             }
         });
-
-
     }
 }

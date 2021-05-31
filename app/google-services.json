@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "780426811042",
+    "project_id": "monedero2-eabaf",
+    "storage_bucket": "monedero2-eabaf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780426811042:android:c656f65c3dee2c685169fb",
+        "android_client_info": {
+          "package_name": "com.dmr.mifare_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "780426811042-nujmgda1t10it5q8v2vtoupttuab932n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPfLcZv9sblHp4YWFHvoDxRJL2w-ZZ4hA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "780426811042-nujmgda1t10it5q8v2vtoupttuab932n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

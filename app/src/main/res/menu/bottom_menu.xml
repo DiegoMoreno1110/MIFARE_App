@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/recargaActivity"
+        android:title="Recarga"
+        android:icon="@drawable/ic_baseline_credit_card_24" />
+
+    <item
+        android:id="@+id/pagoActivity"
+        android:title="Pago"
+        android:icon="@drawable/ic_baseline_monetization_on_24" />
+
+    <item
+        android:id="@+id/historialActivity"
+        android:title="Historial"
+        android:icon="@drawable/ic_baseline_history_24" />
+
+    <item
+        android:id="@+id/configuracionActivity"
+        android:title="Configuración"
+        android:icon="@drawable/ic_settings"/>
+</menu>
