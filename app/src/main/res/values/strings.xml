@@ -25,4 +25,9 @@
     <string name="ready_to_write_instructions">Acerque su dispositivo Android a un tag MIFARE para escribir al Bloque seleccionado con la información introducida.</string>
     <string name="ready_to_read">Listo para leer un bloque del tag Mifare!</string>
     <string name="ready_to_read_instructions">Acerque su dispositivo Android a un tag MIFARE para leer la información del Bloque seleccionado.</string>
+    <!-- Historial Fragment-->
+    <string name="labelTipoMovimiento">Tipo de movimiento: </string>
+    <string name="labelFecha">Fecha: </string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>
+

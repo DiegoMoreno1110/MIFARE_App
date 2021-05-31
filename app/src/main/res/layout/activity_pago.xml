@@ -6,6 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".PagoActivity">
 
+    <Button
+        android:id="@+id/pagoButton"
+        android:layout_width="278dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="100dp"
+        android:background="@color/colorPrimary"
+        android:text="Pagar"
+        android:textColor="#FFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/precioPago"
+
+        app:layout_constraintVertical_bias="0.031"
+
+        />
+
+    <EditText
+        android:id="@+id/precioPago"
+        android:layout_width="273dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="324dp"
+        android:ems="10"
+        android:hint="Cantidad"
+        android:inputType="numberDecimal"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cantidadLabelPago"
+        android:layout_width="269dp"
+        android:layout_height="97dp"
+        android:text="$0"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toTopOf="@+id/precioPago"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.464"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.528"
+        />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -16,4 +64,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu"
         />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
