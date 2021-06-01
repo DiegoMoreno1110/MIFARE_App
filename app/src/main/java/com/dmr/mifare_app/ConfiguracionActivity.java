@@ -67,8 +67,18 @@ public class ConfiguracionActivity extends AppCompatActivity {
     Button pago;
     Button logout;
 
+    //UI NFC
+    EditText keyAET;
+    EditText keyBET;
+    EditText sectorET;
+    EditText bloqueET;
+    RadioGroup mRadioGroup;
+    AlertDialog mTagDialog;
+
     //FireBase
     private DatabaseReference mDatabase;
+
+    //private boolean bandera = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +133,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
         recarga.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 makeRecarga();
+
             }
 
         });
@@ -143,23 +154,16 @@ public class ConfiguracionActivity extends AppCompatActivity {
         );
 
 
-
-        /*
         //Configuracion Activity Componentes y NFC
-
-        mTagUID = ((EditText) findViewById(R.id.tag_uid));
-        mCardType = ((EditText) findViewById(R.id.cardtype));
-        mHexKeyA = ((EditText) findViewById(R.id.editTextKeyA));
-        mHexKeyB = ((EditText) findViewById(R.id.editTextKeyB));
-        mSector = ((EditText) findViewById(R.id.editTextSector));
-        mBloque = ((EditText) findViewById(R.id.editTextBloque));
-        mDataBloque = ((EditText) findViewById(R.id.editTextBloqueLeido));
-        mDatatoWrite = ((EditText) findViewById(R.id.editTextBloqueAEscribir));
+        keyAET = ((EditText) findViewById(R.id.editTextTextKeyA));
+        keyBET = ((EditText) findViewById(R.id.editTextTextKeyB));
+        sectorET = ((EditText) findViewById(R.id.editTextNumberSector));
+        bloqueET = ((EditText) findViewById(R.id.editTextNumberBloque));
         mRadioGroup = ((RadioGroup) findViewById(R.id.rBtnGrp));
 
-        findViewById(R.id.buttonauthenticate).setOnClickListener(mTagAuthenticate);
-        findViewById(R.id.buttonLeerbloque).setOnClickListener(mTagRead);
-        findViewById(R.id.buttonEscribirBloque).setOnClickListener(mTagWrite);
+        findViewById(R.id.buttonAutentificar).setOnClickListener(mTagAuthenticate);
+        //findViewById(R.id.buttonLeerbloque).setOnClickListener(mTagRead);
+        //findViewById(R.id.buttonEscribirBloque).setOnClickListener(mTagWrite);
 
         // get an instance of the context's cached NfcAdapter
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -202,7 +206,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
         resolveReadIntent(getIntent());
 
-        */
+
     }
 
 
@@ -262,6 +266,9 @@ public class ConfiguracionActivity extends AppCompatActivity {
         mDatabase.child("tagsGuardados/transactions").child(idFire).setValue(transaccion);
 
         Toast.makeText(getApplicationContext(), "Se han depositado $" + precio.getText().toString(), Toast.LENGTH_SHORT).show();
+
+        mTagWrite();
+
 
     }
 
@@ -328,11 +335,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
 
 
-
-
-
-    /*
-
+    //NFC METHODS
     void resolveReadIntent(Intent intent) {
         String action = intent.getAction();
 
@@ -347,9 +350,9 @@ public class ConfiguracionActivity extends AppCompatActivity {
                 String hexUID = getHexString(tagUID, tagUID.length);
                 Log.i(TAG, "Tag UID: " + hexUID);
 
-                Editable UIDField = mTagUID.getText();
-                UIDField.clear();
-                UIDField.append(hexUID);
+                //Editable UIDField = mTagUID.getText();
+                //UIDField.clear();
+                //UIDField.append(hexUID);
 
                 switch (mfc.getType()) {
                     case 0:
@@ -386,17 +389,21 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
                 Log.i(TAG, "Card Type: " + tipotag + tamano);
 
-                Editable CardtypeField = mCardType.getText();
-                CardtypeField.clear();
-                CardtypeField.append(tipotag + tamano);
+                //Editable CardtypeField = mCardType.getText();
+                //CardtypeField.clear();
+                //CardtypeField.append(tipotag + tamano);
 
+                Toast.makeText(this, "UID: " + hexUID + " Tag: " + tipotag + tamano, Toast.LENGTH_LONG).show();
 
+                /*
                 //Se crea el tag
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                 mDatabase = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
                 TagUser tag = new TagUser(hexUID, tipotag + tamano);
                 mDatabase.child("tagsGuardados").setValue(tag);
+
+                 */
 
 
             } else {
@@ -405,15 +412,15 @@ public class ConfiguracionActivity extends AppCompatActivity {
                     boolean auth = false;
                     String hexkey = "";
                     int id = mRadioGroup.getCheckedRadioButtonId();
-                    int sector = mfc.blockToSector(Integer.valueOf(mBloque.getText().toString()));
+                    int sector = mfc.blockToSector(Integer.valueOf(bloqueET.getText().toString()));
                     byte[] datakey;
 
                     if (id == R.id.radioButtonkeyA) {
-                        hexkey = mHexKeyA.getText().toString();
+                        hexkey = keyAET.getText().toString();
                         datakey = hexStringToByteArray(hexkey);
                         auth = mfc.authenticateSectorWithKeyA(sector, datakey);
                     } else if (id == R.id.radioButtonkeyB) {
-                        hexkey = mHexKeyB.getText().toString();
+                        hexkey = keyBET.getText().toString();
                         datakey = hexStringToByteArray(hexkey);
                         auth = mfc.authenticateSectorWithKeyB(sector, datakey);
                     } else {
@@ -423,8 +430,10 @@ public class ConfiguracionActivity extends AppCompatActivity {
                         return;
                     }
 
+
+
                     if (auth) {
-                        int bloque = Integer.valueOf(mBloque.getText().toString());
+                        int bloque = Integer.valueOf(bloqueET.getText().toString());
                         byte[] dataread = mfc.readBlock(bloque + 1);
                         Log.i("Bloques", getHexString(dataread, dataread.length));
 
@@ -432,14 +441,14 @@ public class ConfiguracionActivity extends AppCompatActivity {
                         String blockread = getHexString(dataread, dataread.length);
                         Log.i(TAG, "Bloque Leido: " + blockread);
 
-                        Editable BlockField = mDataBloque.getText();
-                        BlockField.clear();
-                        BlockField.append(blockread);
-                        Toast.makeText(this, "Lectura de bloque EXITOSA.", Toast.LENGTH_LONG).show();
+                        //Editable BlockField = mDataBloque.getText();
+                        //BlockField.clear();
+                        //BlockField.append(blockread);
+                        Toast.makeText(this, "Lectura de bloque EXITOSA: " + blockread, Toast.LENGTH_LONG).show();
                     } else {
                         // Authentication failed -Handle it
-                        Editable BlockField = mDataBloque.getText();
-                        BlockField.clear();
+                        //Editable BlockField = mDataBloque.getText();
+                        //BlockField.clear();
                         Toast.makeText(this, "Lectura de bloque FALLIDA dado autentificación fallida.", Toast.LENGTH_LONG).show();
                     }
 
@@ -465,16 +474,16 @@ public class ConfiguracionActivity extends AppCompatActivity {
                 boolean auth = false;
                 String hexkey = "";
                 int id = mRadioGroup.getCheckedRadioButtonId();
-                int bloque = Integer.valueOf(mBloque.getText().toString());
+                int bloque = Integer.valueOf(bloqueET.getText().toString());
                 int sector = mfc.blockToSector(bloque);
                 byte[] datakey;
 
                 if (id == R.id.radioButtonkeyA) {
-                    hexkey = mHexKeyA.getText().toString();
+                    hexkey = keyAET.getText().toString();
                     datakey = hexStringToByteArray(hexkey);
                     auth = mfc.authenticateSectorWithKeyA(sector, datakey);
                 } else if (id == R.id.radioButtonkeyB) {
-                    hexkey = mHexKeyB.getText().toString();
+                    hexkey = keyBET.getText().toString();
                     datakey = hexStringToByteArray(hexkey);
                     auth = mfc.authenticateSectorWithKeyB(sector, datakey);
                 } else {
@@ -484,15 +493,30 @@ public class ConfiguracionActivity extends AppCompatActivity {
                     return;
                 }
 
+
                 if (auth) {
-                    String strdata = mDatatoWrite.getText().toString();
-                    byte[] datatowrite = hexStringToByteArray(strdata);
+
+                    Toast.makeText(this, "ENTRANDO AUTH ESCRITURA." , Toast.LENGTH_LONG).show();
+
+                    String strdata = precio.getText().toString();
+
+                    //Convertir de int a hex
+                    int precioTag = Integer.parseInt(strdata);
+
+                    String valorConvertido = Integer.toHexString(precioTag);
+                    Log.i("MESSAGE HEX", valorConvertido);
+
+
+                    byte[] datatowrite = hexStringToByteArray(valorConvertido);
                     mfc.writeBlock(bloque, datatowrite);
-                    Toast.makeText(this, "Escritura a bloque EXITOSA.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Escritura a bloque EXITOSA." +  valorConvertido, Toast.LENGTH_LONG).show();
                 } else {
                     // Authentication failed -Handle it
                     Toast.makeText(this, "Escritura a bloque FALLIDA dado autentificación fallida.", Toast.LENGTH_LONG).show();
                 }
+
+
+
 
                 mfc.close();
                 mTagDialog.cancel();
@@ -515,15 +539,15 @@ public class ConfiguracionActivity extends AppCompatActivity {
                 boolean auth = false;
                 String hexkey = "";
                 int id = mRadioGroup.getCheckedRadioButtonId();
-                int sector = Integer.valueOf(mSector.getText().toString());
+                int sector = Integer.valueOf(sectorET.getText().toString());
                 byte[] datakey;
 
                 if (id == R.id.radioButtonkeyA) {
-                    hexkey = mHexKeyA.getText().toString();
+                    hexkey = keyAET.getText().toString();
                     datakey = hexStringToByteArray(hexkey);
                     auth = mfc.authenticateSectorWithKeyA(sector, datakey);
                 } else if (id == R.id.radioButtonkeyB) {
-                    hexkey = mHexKeyB.getText().toString();
+                    hexkey = keyBET.getText().toString();
                     datakey = hexStringToByteArray(hexkey);
                     auth = mfc.authenticateSectorWithKeyB(sector, datakey);
                 } else {
@@ -536,6 +560,9 @@ public class ConfiguracionActivity extends AppCompatActivity {
                 if (auth) {
                     Toast.makeText(this, "Autentificación de sector EXITOSA.", Toast.LENGTH_LONG).show();
 
+
+                    //bandera = true;
+                    /*
                     TagUser tag = new TagUser(mTagUID.getText().toString(), mCardType.getText().toString(), sector, hexkey, Integer.parseInt(mBloque.getText().toString()));
 
                     //Se crea el tag
@@ -543,7 +570,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
                     mDatabase = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
                     mDatabase.child("tagsGuardados").setValue(tag);
-
+                     */
 
                 } else {
                     // Authentication failed -Handle it
@@ -639,9 +666,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
     };
 
 
-    private View.OnClickListener mTagRead = new View.OnClickListener(){
-        @Override
-        public void onClick(View arg0){
+    private void mTagRead(){
             enableTagReadMode();
             ReadUIDMode = false;
             AlertDialog.Builder builder = new AlertDialog.Builder(ConfiguracionActivity.this)
@@ -663,12 +688,10 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
             mTagDialog = builder.create();
             mTagDialog.show();
-        }
+
     };
 
-    private View.OnClickListener mTagWrite = new View.OnClickListener(){
-        @Override
-        public void onClick(View arg0){
+    private void mTagWrite(){
             enableTagWriteMode();
             AlertDialog.Builder builder = new AlertDialog.Builder(ConfiguracionActivity.this)
                     .setTitle(getString(R.string.ready_to_write))
@@ -688,7 +711,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
             mTagDialog = builder.create();
             mTagDialog.show();
-        }
+
     };
 
 
@@ -707,6 +730,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
                     }).create().show();
         }
     }
+    
     public static String getHexString(byte[] b, int length){
         String result = "";
         Locale loc = Locale.getDefault();
@@ -730,6 +754,6 @@ public class ConfiguracionActivity extends AppCompatActivity {
         return data;
     }
 
-    */
+
 
 }
