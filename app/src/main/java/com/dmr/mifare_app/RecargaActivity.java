@@ -45,32 +45,7 @@ public class RecargaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recarga);
-        // Menu Components  (no mover)
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.recargaActivity); // este es el HOME
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch(menuItem.getItemId()){
-                    case R.id.pagoActivity:
-                        startActivity(new Intent(getApplicationContext(),PagoActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.historialActivity:
-                        startActivity(new Intent(getApplicationContext(),HistorialActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.configuracionActivity:
-                        startActivity(new Intent(getApplicationContext(),ConfiguracionActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.recargaActivity:
-                        return true;
-                }
-                return false;
-            }
-        });
 
         // IU elementos
         recarga = (Button) findViewById(R.id.recargaButton);
@@ -119,7 +94,7 @@ public class RecargaActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
 
-        mDatabase.child("tagsGuardados").child("montoActual").addListenerForSingleValueEvent(
+        mDatabase.child("montoActual").child("montoActual").addListenerForSingleValueEvent(
                 new ValueEventListener() {
 
                     @Override
@@ -129,7 +104,7 @@ public class RecargaActivity extends AppCompatActivity {
 
                             double precioVar = Double.parseDouble(precio.getText().toString());
                             double total = montoActual + precioVar;
-                            mDatabase.child("tagsGuardados").child("montoActual").setValue(total);
+                            mDatabase.child("montoActual").child("montoActual").setValue(total);
 
                             Toast.makeText(getApplicationContext(), "Monto Actual: " + total, Toast.LENGTH_SHORT).show();
 

@@ -15,9 +15,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ConfiguracionActivity"></activity>
+        <activity android:name=".ConfiguracionActivity">
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/filter_nfc" />
+        </activity>
         <activity android:name=".HistorialActivity" />
-        <activity android:name=".PagoActivity" />
+        <activity android:name=".PagoActivity">
+        </activity>
         <activity android:name=".RecargaActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>

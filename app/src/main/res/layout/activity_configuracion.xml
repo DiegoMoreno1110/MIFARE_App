@@ -6,6 +6,81 @@
     android:layout_height="match_parent"
     tools:context=".ConfiguracionActivity">
 
+    <!-- Componentes Pago-->
+
+    <Button
+        android:id="@+id/recargaButton"
+        android:layout_width="150dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
+        android:background="@color/colorPrimary"
+
+        android:text="Recargar"
+        android:textColor="#FFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/precioRecarga" />
+
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="178dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimary"
+
+        android:text="Log out"
+        android:textColor="#FFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recargaButton" />
+
+    <Button
+        android:id="@+id/pagoButton"
+        android:layout_width="150dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorPrimary"
+        android:text="Pagar"
+
+        android:textColor="#FFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.587"
+        app:layout_constraintStart_toEndOf="@+id/recargaButton"
+        app:layout_constraintTop_toBottomOf="@+id/precioRecarga" />
+
+    <EditText
+        android:id="@+id/precioRecarga"
+        android:layout_width="273dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="108dp"
+        android:ems="10"
+        android:hint="Cantidad"
+        android:inputType="numberDecimal"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cantidadLabelRecarga"
+        android:layout_width="275dp"
+        android:layout_height="79dp"
+        android:text="$0"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toTopOf="@+id/precioRecarga"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.146" />
+
+
+    <!--Card configuración-->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -16,4 +91,178 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu"
         />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logout">
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="326dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="18dp"
+            android:text="AUTH"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="119dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView9"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="20dp"
+            android:text="KeyA"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/editTextTextKeyA"
+            android:layout_width="178dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView9"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="23dp"
+            android:layout_toEndOf="@+id/textView2"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="119dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView2"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="33dp"
+            android:text="Key B"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/editTextTextKeyB"
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView2"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="23dp"
+            android:layout_toEndOf="@+id/textView5"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="226dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView5"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="31dp"
+            android:text="Sector"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/editTextNumberSector"
+            android:layout_width="91dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTextTextKeyB"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="23dp"
+            android:layout_toEndOf="@+id/textView7"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="144dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView7"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="31dp"
+            android:text="Llave"
+            android:textSize="16sp" />
+
+        <RadioGroup
+            android:id="@+id/rBtnGrp"
+            android:layout_width="144dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView7"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="27dp"
+            android:layout_marginEnd="23dp"
+            android:layout_toEndOf="@+id/textView10"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButtonkeyA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Key A" />
+
+            <RadioButton
+                android:id="@+id/radioButtonkeyB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Key B" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/buttonAutentificar"
+            android:layout_width="256dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/textViewBloque"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="46dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="44dp"
+            android:background="@color/colorPrimary"
+            android:text="Auth"
+            android:textColor="#FFF" />
+
+        <TextView
+            android:id="@+id/textViewBloque"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView10"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="27dp"
+            android:text="Bloque"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/editTextNumberBloque"
+            android:layout_width="239dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rBtnGrp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="23dp"
+            android:layout_toEndOf="@+id/textViewBloque"
+            android:ems="10"
+            android:inputType="number" />
+
+
+    </RelativeLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

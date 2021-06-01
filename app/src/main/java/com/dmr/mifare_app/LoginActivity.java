@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // action to recarga fragment if firebaseUsee!= null
         if(firebaseUser!=null){
-            Intent intent = new Intent(this, RecargaActivity.class);
+            Intent intent = new Intent(this, ConfiguracionActivity.class);
             startActivity(intent);
         }
 
@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(v.getContext(), "Bienvenido", Toast.LENGTH_SHORT).show();
                                 // pasar aqui a otra pantalla (recarga fragment)
-                                Intent intent = new Intent(v.getContext(), RecargaActivity.class);
+                                Intent intent = new Intent(v.getContext(), ConfiguracionActivity.class);
                                 startActivity(intent);
                             }
                             else {
@@ -125,6 +125,12 @@ public class LoginActivity extends AppCompatActivity {
     public void updateUI(FirebaseUser currentUser){
         //String keyId = mDatabase.push().getKey();
         mDatabase.child(currentUser.getUid()).setValue(user);
+
+
+
+        mDatabase.child(currentUser.getUid()).child("montoActual").setValue(0.0);
+
+
         Toast.makeText(this, "Se creó un nuevo usuario con éxito", Toast.LENGTH_SHORT).show();
         //Toast.makeText(this, "Acerca su tag al celular para registrarlo con su usuario", Toast.LENGTH_SHORT).show();
         //   resolveReadIntent(this.getIntent());

@@ -49,14 +49,7 @@ public class HistorialActivity extends AppCompatActivity {
                 switch(menuItem.getItemId()){
                     case R.id.historialActivity:
                         return true;
-                    case R.id.pagoActivity:
-                        startActivity(new Intent(getApplicationContext(),PagoActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.recargaActivity:
-                        startActivity(new Intent(getApplicationContext(),RecargaActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
+
                     case R.id.configuracionActivity:
                         startActivity(new Intent(getApplicationContext(),ConfiguracionActivity.class));
                         overridePendingTransition(0,0);
@@ -84,7 +77,6 @@ public class HistorialActivity extends AppCompatActivity {
 
 
         database.addValueEventListener(new ValueEventListener(){
-
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){

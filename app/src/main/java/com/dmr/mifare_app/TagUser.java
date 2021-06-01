@@ -4,8 +4,14 @@ public class TagUser {
     private String idFire;
     private String idu;
     private double montoActual;
+
+
+
     private String UID;
     private String tipo;
+    private int sector;
+    private String llave;
+    private int bloque;
 
 
     public TagUser(String id, int String, double montoActual){
@@ -13,6 +19,14 @@ public class TagUser {
         this.idu = idu;
         this.montoActual = montoActual;
 
+    }
+
+    public TagUser(String UID, String tipo, int sector, String llave, int bloque) {
+        this.UID = UID;
+        this.tipo = tipo;
+        this.sector = sector;
+        this.llave = llave;
+        this.bloque = bloque;
     }
 
     public TagUser(double montoActual){
@@ -23,6 +37,42 @@ public class TagUser {
         this.montoActual = montoActual;
         this.UID = UID;
         this.tipo = tipo;
+    }
+
+    public TagUser(String UID, String tipo){
+        this.UID = UID;
+        this.tipo = tipo;
+    }
+
+    public TagUser(int sector, String llave){
+        this.sector = sector;
+        this.llave = llave;
+    }
+
+
+    public int getBloque() {
+        return bloque;
+    }
+
+    public void setBloque(int bloque) {
+        this.bloque = bloque;
+    }
+
+
+    public int getSector() {
+        return sector;
+    }
+
+    public void setSector(int sector) {
+        this.sector = sector;
+    }
+
+    public String getLlave() {
+        return llave;
+    }
+
+    public void setLlave(String llave) {
+        this.llave = llave;
     }
 
 
