@@ -92,6 +92,8 @@ public class ConfiguracionActivity extends AppCompatActivity {
         logout = (Button)findViewById(R.id.logout);
         pago = (Button) findViewById(R.id.pagoButton);
 
+
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.configuracionActivity); // este es el HOME
 
@@ -101,7 +103,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
                 switch(menuItem.getItemId()){
 
                     case R.id.historialActivity:
-                        startActivity(new Intent(getApplicationContext(),HistorialActivity.class));
+                        startActivity(new Intent(ConfiguracionActivity.this,HistorialActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 
@@ -145,11 +147,14 @@ public class ConfiguracionActivity extends AppCompatActivity {
             }
         });
 
+
+
+
         // Boton de log out
         logout.setOnClickListener(new View.OnClickListener(){
                                       public void onClick(View v){
                                           FirebaseAuth.getInstance().signOut();
-                                          startActivity(new Intent(getApplicationContext(),LoginActivity.class));            }
+                                          startActivity(new Intent(ConfiguracionActivity.this,LoginActivity.class));            }
                                   }
         );
 
@@ -163,7 +168,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
         findViewById(R.id.buttonAutentificar).setOnClickListener(mTagAuthenticate);
         //findViewById(R.id.buttonLeerbloque).setOnClickListener(mTagRead);
-        //findViewById(R.id.buttonEscribirBloque).setOnClickListener(mTagWrite);
+        findViewById(R.id.buttonGuardar).setOnClickListener(mTagWrite);
 
         // get an instance of the context's cached NfcAdapter
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -228,7 +233,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
                             double total = montoActual + precioVar;
                             mDatabase.child("montoActual").setValue(total);
 
-                            Toast.makeText(getApplicationContext(), "Monto Actual: " + total, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ConfiguracionActivity.this, "Monto Actual: " + total, Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -265,9 +270,9 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
         mDatabase.child("tagsGuardados/transactions").child(idFire).setValue(transaccion);
 
-        Toast.makeText(getApplicationContext(), "Se han depositado $" + precio.getText().toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Se han depositado $" + precio.getText().toString(), Toast.LENGTH_SHORT).show();
 
-        mTagWrite();
+        //mTagWrite();
 
 
     }
@@ -291,7 +296,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
                             double total = montoActual - precioVar;
                             mDatabase.child("montoActual").setValue(total);
 
-                            Toast.makeText(getApplicationContext(), "Monto Actual: " + total, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ConfiguracionActivity.this, "Monto Actual: " + total, Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -329,7 +334,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
         mDatabase.child("tagsGuardados/transactions").child(idFire).setValue(transaccion);
 
-        Toast.makeText(getApplicationContext(), "Se ha pagado $" + precio.getText().toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Se ha pagado $" + precio.getText().toString(), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -465,6 +470,9 @@ public class ConfiguracionActivity extends AppCompatActivity {
     void resolveWriteIntent(Intent intent) {
         String action = intent.getAction();
 
+        Toast.makeText(this, "ENTRANDO resolve ESCRITURA." , Toast.LENGTH_LONG).show();
+
+
         if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
             Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
             MifareClassic mfc = MifareClassic.get(tagFromIntent);
@@ -498,18 +506,26 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
                     Toast.makeText(this, "ENTRANDO AUTH ESCRITURA." , Toast.LENGTH_LONG).show();
 
-                    String strdata = precio.getText().toString();
+                    //String strdata = precio.getText().toString();
 
                     //Convertir de int a hex
-                    int precioTag = Integer.parseInt(strdata);
+                    //int precioTag = Integer.parseInt(strdata);
 
-                    String valorConvertido = Integer.toHexString(precioTag);
-                    Log.i("MESSAGE HEX", valorConvertido);
+                    //String valorConvertido = Integer.toHexString(precioTag);
+                    //Log.i("MESSAGE HEX", valorConvertido);
+
+                    //System.out.println("MESSAGE HEX" + valorConvertido);
+
+                    //Toast.makeText(this, "MESSAGE HEX: " + valorConvertido , Toast.LENGTH_LONG).show();
 
 
-                    byte[] datatowrite = hexStringToByteArray(valorConvertido);
+                    String strdata = "AAAABBBBCCCCDDDD1111222233334444";
+                    byte[] datatowrite = hexStringToByteArray(strdata);
+
+
+                    //byte[] datatowrite = hexStringToByteArray(valorConvertido);
                     mfc.writeBlock(bloque, datatowrite);
-                    Toast.makeText(this, "Escritura a bloque EXITOSA." +  valorConvertido, Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Escritura a bloque EXITOSA." , Toast.LENGTH_LONG).show();
                 } else {
                     // Authentication failed -Handle it
                     Toast.makeText(this, "Escritura a bloque FALLIDA dado autentificación fallida.", Toast.LENGTH_LONG).show();
@@ -691,8 +707,11 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
     };
 
-    private void mTagWrite(){
+    private View.OnClickListener mTagWrite = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
             enableTagWriteMode();
+
             AlertDialog.Builder builder = new AlertDialog.Builder(ConfiguracionActivity.this)
                     .setTitle(getString(R.string.ready_to_write))
                     .setMessage(getString(R.string.ready_to_write_instructions))
@@ -712,6 +731,8 @@ public class ConfiguracionActivity extends AppCompatActivity {
             mTagDialog = builder.create();
             mTagDialog.show();
 
+
+        }
     };
 
 
@@ -730,7 +751,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
                     }).create().show();
         }
     }
-    
+
     public static String getHexString(byte[] b, int length){
         String result = "";
         Locale loc = Locale.getDefault();

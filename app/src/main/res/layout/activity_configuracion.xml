@@ -24,14 +24,14 @@
 
     <Button
         android:id="@+id/logout"
-        android:layout_width="178dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorPrimary"
+        android:layout_width="150dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
 
+        android:background="@color/colorPrimary"
         android:text="Log out"
         android:textColor="#FFF"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recargaButton" />
 
@@ -263,6 +263,20 @@
 
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/buttonGuardar"
+        android:layout_width="152dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="8dp"
+        android:text="Guardar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toEndOf="@+id/logout"
+        app:layout_constraintTop_toBottomOf="@+id/pagoButton"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFF"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
